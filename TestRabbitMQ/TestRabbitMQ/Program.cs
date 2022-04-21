@@ -1,23 +1,11 @@
-﻿using TestRabbitMQ;
+﻿using TestRabbitMQ.CleanRabbit;
+using TestRabbitMQ.TestMassTransit;
 
-string queue = "testQueue";
-Console.WriteLine("Choose your process: 1 - send message, 2 - check message [default send message], 3 - WebAPI send");
-var command = Console.ReadLine();
-switch (command)
+Console.WriteLine("What you wanna test? 1 - Clean RabbitMQ; 2 - MainTransit publisher, 3 - MassTransit consumer");
+switch (Console.ReadKey().Key)
 {
-    case "2": new Listener().Check(queue); break;
-    case "3": new SenderRESTApi().Send(queue); break;
-    default: Console.WriteLine(" Enter the messages (stop word - exit)"); SendMessage(); break;
-}
-
-void SendMessage()
-{
-    using (var sender = new Sender())
-        while (true)
-        {
-            var message = Console.ReadLine();
-            if (message.ToLower() == "exit")
-                break;
-            sender.Send(message, queue);
-        }
+    case ConsoleKey.D1: new RabbitController(); break;
+    case ConsoleKey.D2: await PublisherProgram.Main();  break;
+    case ConsoleKey.D3: await ConsumerProgram.Main();  break;
+    default: Console.WriteLine("Unkown command"); break;
 }

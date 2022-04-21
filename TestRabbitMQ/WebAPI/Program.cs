@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Transports.Fabric;
 using WebAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,10 @@ builder.Services.AddMassTransit(x =>
     x.UsingRabbitMq((context, config) =>
     {
         config.Host("amqp://guest:guest@localhost:5672");
+        config.Message<WeatherForecast>(x => x.SetEntityName("weather-exchange"));
+        config.Publish<WeatherForecast>(x => x.ExchangeType = "direct");
     });
-    x.AddRequestClient<WeatherForecast>();
+    x.AddRequestClient<WeatherForecast>(new Uri("exchange:weather-exchange"));
     }
 ); 
 

@@ -36,16 +36,20 @@ namespace WebAPI.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<WeatherForecastPostResponse>> Post([FromBody] WeatherForecast value)
+        public async Task<ActionResult<BasicResponse>> Post([FromBody] WeatherForecast value)
         {
             try
             {
                 //await publishEndpoint.Publish<WeatherForecast>(value);
-                using (var request = _client.Create(value))
-                {
-                    var response = await request.GetResponse<WeatherForecastPostResponse>();
-                    return response.Message;
-                };
+
+                //using (var request = _client.Create(value))
+                //{
+                //    var response = await request.GetResponse<WeatherForecastPostResponse>();
+                //    return response.Message;
+                //};
+
+                var result = await _client.GetResponse<BasicResponse>(value);
+                return result.Message;
             }
             catch (Exception ex)
             {

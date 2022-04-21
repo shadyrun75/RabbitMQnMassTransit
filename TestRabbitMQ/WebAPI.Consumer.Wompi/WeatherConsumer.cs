@@ -21,7 +21,7 @@ internal class WeatherConsumer : IConsumer<WeatherForecast>
         WeatherForecastController controller = new WeatherForecastController();
         await controller.Post(context.Message);
         Logger.LogInformation(message);
-        context.Respond(new WeatherForecastPostResponse()
+        context.Respond(new BasicResponse()
         { 
             Message = "Ok",
             Success = true,

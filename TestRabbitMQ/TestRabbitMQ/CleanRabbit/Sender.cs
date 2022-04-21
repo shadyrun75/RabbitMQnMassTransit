@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestRabbitMQ
+namespace TestRabbitMQ.CleanRabbit
 {
     public class Sender : IDisposable
     {
@@ -41,8 +41,8 @@ namespace TestRabbitMQ
             }
             var body = Encoding.UTF8.GetBytes(message);
             channel.BasicPublish(
-                exchange: "test-queue",
-                routingKey: "warning", 
+                exchange: "",
+                routingKey: queue, 
                 basicProperties: null, 
                 body: body);
             System.Threading.Thread.Sleep(1);

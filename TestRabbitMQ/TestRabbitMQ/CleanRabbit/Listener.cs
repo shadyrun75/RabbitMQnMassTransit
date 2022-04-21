@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestRabbitMQ
+namespace TestRabbitMQ.CleanRabbit
 {
     public class Listener
     {

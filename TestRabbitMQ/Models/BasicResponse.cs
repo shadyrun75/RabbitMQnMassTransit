@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class WeatherForecastPostResponse
+    public class BasicResponse : IBasicResponse
     {
         public string Message { get; set; }
         public bool Success { get; set; }

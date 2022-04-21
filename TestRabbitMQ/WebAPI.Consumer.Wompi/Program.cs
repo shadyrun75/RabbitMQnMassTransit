@@ -10,7 +10,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<WeatherConsumer>();    
+    x.AddConsumer<WeatherConsumer>();
+    x.AddConsumer<WeatherConsumerHightTemperature>();
+    x.AddConsumer<WeatherConsumerLowTemperature>();
+    
     x.UsingRabbitMq((context, config) =>
     {
         config.Host("amqp://guest:guest@localhost:5672");
@@ -20,7 +23,17 @@ builder.Services.AddMassTransit(x =>
         config.ReceiveEndpoint("WeatherForecast-Queue", c => 
         {
             c.ConfigureConsumer<WeatherConsumer>(context);
-            
+
+            //c.Consumer<WeatherConsumerHightTemperature>(x =>
+            //{
+
+            //});
+            //c.Bind("weather-exchange", s =>
+            //{
+            //    s.
+            //    //s.RoutingKey = "";
+            //    //s.ExchangeType = "direct";
+            //});
         });
     });
 });
