@@ -67,7 +67,7 @@ namespace TestRabbitMQ.TestMassTransit
                     //e.DeadLetterExchange = "weather-exchange";
                     //e.AutoDelete = true;
                     //e.AutoStart = true;
-                    e.BindQueue = false;
+                    e.BindQueue = true;
 
                     //If you are binding the messages types to the receive endpoint that are the same as message types in the consumer,
                     //you need to disable the automatic exchange binding.
